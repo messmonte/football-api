@@ -1,30 +1,30 @@
 const { Router } = require("express");
-const Team = require("./model");
+const Player = require("./model");
 
 const router = new Router();
 
-router.get("/teams", (req, res, next) => {
-  Team.findAll()
+router.get("/players", (req, res, next) => {
+  Player.findAll()
     .then(list => res.json(list))
     .catch(next);
 });
 
-router.post("/teams", (req, res, next) => {
-  Team.create(req.body)
-    .then(team => {
-      res.json(team);
+router.post("/players", (req, res, next) => {
+  Player.create(req.body)
+    .then(player => {
+      res.json(player);
     })
     .catch(next);
 });
 
-router.get("/teams/:id", (req, res, next) => {
+router.get("/players/:id", (req, res, next) => {
   console.log("req.params.id :", typeof req.params.id);
-  Team.findByPk(req.params.id)
-    .then(team => {
-      if (!team) {
+  Player.findByPk(req.params.id)
+    .then(player => {
+      if (!player) {
         res.status(404).end();
       } else {
-        res.json(team);
+        res.json(player);
       }
     })
     .catch(next);
